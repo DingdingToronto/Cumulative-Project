@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34031.279
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cumulative_JiabaoDing", "Cumulative_JiabaoDing\Cumulative_JiabaoDing.csproj", "{A8352AE5-3FA1-40CC-9552-56364F9C6DFA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A8352AE5-3FA1-40CC-9552-56364F9C6DFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8352AE5-3FA1-40CC-9552-56364F9C6DFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8352AE5-3FA1-40CC-9552-56364F9C6DFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8352AE5-3FA1-40CC-9552-56364F9C6DFA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {262B5B11-E608-4FC6-9362-3CA6EFD4F94D}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,26 @@
+﻿﻿@model IEnumerable<SchoolProject.Models.Class>
+@{
+    ViewBag.Title = "List";
+}
+
+<div id="containerlist">
+    <h2>List of Classes</h2>
+    <form action="/Class/ListClass" method="GET">
+        <input type="number" name="SearchId" autocomplete="off" placeholder="Class Id" />
+        <input type="text" name="SearchCode" placeholder="Class Code" />
+        <input type="text" name="SearchName" placeholder="Class Name" />
+
+        <input type="date" name="SearchStartDate" placeholder="Class Start Date" />
+        <input type="date" name="SearchFinishDate" placeholder="Class Finish Date" />
+        <input type="text" name="SearchTeacherName" autocomplete="off" placeholder="Teacher Last Name" />
+
+        <input type="submit" value="Search" />
+    </form>
+    @foreach (var Class in Model)
+    {
+        <div class="listitem row">
+            <div class="col-md-12"><a href="/Class/ShowClass/@Class.ClassId"> @Class.ClassName</a></div>
+        </div>
+    }
+</div>
+

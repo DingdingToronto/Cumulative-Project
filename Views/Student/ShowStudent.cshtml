@@ -1,0 +1,12 @@
+﻿﻿@model SchoolProject.Models.Student
+@{
+    ViewBag.Title = "ShowStudent";
+}
+
+<a class="navlink" href="/Student/Liststudent">Back To Students</a>
+<div id="containershow">
+    <h2>@Model.StudentLname @Model.StudentFname</h2>
+    <p>Student Id: @Model.StudentNumber</p>
+    <p>Student Enroldate: @Model.StudentEnrolDate</p>
+
+</div>

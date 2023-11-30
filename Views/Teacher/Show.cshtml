@@ -1,0 +1,24 @@
+﻿@model SchoolProject.Models.Teacher
+@{
+    ViewBag.Title = "Show";
+}
+
+<a class="navlink" href="/Teacher/List">Back To Teachers</a>
+<a class="dellink" href="/Teacher/DeleteConfirm/@Model.TeacherId">Delete</a>
+<div id="containershow">
+    <h2>@Model.TeacherFname @Model.TeacherLname</h2>
+    <p><strong>Teacher Salary:</strong> @Model.TeacherSalary</p>
+    <p><strong>Teacher Hiredate:</strong> @Model.TeacherDate </p>
+    <p><strong>Teacher employeenumber:</strong> @Model.TeacherNumber</p>
+
+    @if (Model.TeacherClass != null && Model.TeacherClass.Length > 0)
+    {
+        <h5>Teacher Class: @string.Join(", ", Model.TeacherClass)</h5>
+    }
+    else
+    {
+        <h5>Teacher Class: None</h5>
+    }
+</div>
+
+

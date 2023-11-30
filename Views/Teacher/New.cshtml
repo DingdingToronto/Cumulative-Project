@@ -4,6 +4,7 @@
 
 <script>
     function validateForm() {
+        console.log("validateForm called");
         var fname = document.getElementById("TeacherFname").value;
         var lname = document.getElementById("TeacherLname").value;
         var empNumber = document.getElementById("TeacherNumber").value;
@@ -17,35 +18,8 @@
 
         return true; // Allow form submission
     }
-
-    function addTeacher() {
-        var formData = {
-            TeacherFname: document.getElementById("TeacherFname").value,
-            TeacherLname: document.getElementById("TeacherLname").value,
-            TeacherNumber: document.getElementById("TeacherNumber").value,
-            TeacherSalary: document.getElementById("TeacherSalary").value,
-            TeacherDate: document.getElementById("TeacherDate").value
-        };
-
-        var xhr = new XMLHttpRequest();
-        var url = "http://localhost:62499/api/TeacherData/AddTeacher";
-        xhr.open("POST", url, true);
-        xhr.setRequestHeader("Content-Type", "application/json");
-
-        xhr.onload = function () {
-            if (xhr.status === 200) {
-                console.log("Teacher added successfully!");
-                // Optionally, you can handle success actions here
-            } else {
-                console.error("Error adding teacher");
-                // Optionally, you can handle error actions here
-            }
-        };
-
-        var jsonData = JSON.stringify(formData);
-        xhr.send(jsonData);
-    }
 </script>
+
 
 <div id="containershow">
     <nav>
@@ -78,7 +52,7 @@
             </div>
         </div>
         <div class="inputrow">
-            <button type="button" onclick="addTeacher()">Add Teacher</button>
+            <button type="submit">Add Teacher</button>
         </div>
     </form>
 </div>

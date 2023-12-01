@@ -77,6 +77,15 @@ namespace SchoolProject.Controllers
             return View();
         }
 
+
+        //GET : /Teacher/Ajax_New
+        public ActionResult Ajax_New()
+        {
+            return View();
+
+        }
+
+
         [HttpPost]
         public ActionResult Delete(int id)
         {

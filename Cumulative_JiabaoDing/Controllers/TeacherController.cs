@@ -38,7 +38,7 @@ namespace SchoolProject.Controllers
         //POST : /Teacher/Create
         [HttpPost]
         
-        public ActionResult Create(string TeacherFname, string TeacherLname, double TeacherSalary, DateTime TeacherDate, string TeacherNumber)
+        public ActionResult Create(string TeacherFname, string TeacherLname, string TeacherNumber, double TeacherSalary = 0.00, DateTime? TeacherDate = null)
         {
             // Server-side validation
             if (string.IsNullOrWhiteSpace(TeacherFname) ||
@@ -58,7 +58,7 @@ namespace SchoolProject.Controllers
                 TeacherFname = TeacherFname,
                 TeacherLname = TeacherLname,
                 TeacherSalary = TeacherSalary,
-                TeacherDate = TeacherDate,
+                TeacherDate = (DateTime)TeacherDate,
                 TeacherNumber = TeacherNumber
             };
 

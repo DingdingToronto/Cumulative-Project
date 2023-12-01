@@ -1,8 +1,6 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "AJAX NEW";
 }
-
 
 <div id="containershow">
     <nav>
@@ -10,21 +8,23 @@
     </nav>
     <h2>New Author</h2>
 
-    <form method="POST" action="/Teacher/Create">
+    <form method="POST" action="/Teacher/Create" onsubmit="return validateForm()">
 
         <div class="inputrow">
             <label for="TeacherFname">First Name:</label>
             <input type="text" id="TeacherFname" name="TeacherFname" />
-
         </div>
         <div class="inputrow">
             <label for="TeacherLname">Last Name:</label>
             <input type="text" id="TeacherLname" name="TeacherLname" />
-
         </div>
         <div class="inputrow">
             <label for="TeacherSalary">Salary:</label>
             <input type="text" id="TeacherSalary" name="TeacherSalary" />
+        </div>
+        <div class="inputrow">
+            <label for="TeacherNumber">Employeenumber:</label>
+            <input type="text" id="TeacherNumber" name="TeacherNumber" />
         </div>
         <div class="inputrow">
             <label for="TeacherDate">Hiredate:</label>
@@ -35,7 +35,7 @@
 
         <button onclick="AddTeacher();">Add Teacher</button>
     </form>
-       
+
 </div>
 <!-- Include this script in your HTML file or in a separate .js file -->
 <script>
@@ -45,7 +45,8 @@
             TeacherFname: document.getElementById('TeacherFname').value,
             TeacherLname: document.getElementById('TeacherLname').value,
             TeacherSalary: document.getElementById('TeacherSalary').value,
-            TeacherDate: document.getElementById('TeacherDate').value
+            TeacherDate: document.getElementById('TeacherDate').value,
+            TeacherNumber: document.getElementById('TeacherNumber').value
         };
 
         // Create a new XHR object
@@ -76,5 +77,21 @@
 
         // Send the request with the JSON data
         xhr.send(jsonData);
+    }
+
+    function validateForm() {
+        console.log("validateForm called");
+        var fname = document.getElementById("TeacherFname").value;
+        var lname = document.getElementById("TeacherLname").value;
+        var empNumber = document.getElementById("TeacherNumber").value;
+        var salary = document.getElementById("TeacherSalary").value;
+        var hireDate = document.getElementById("TeacherDate").value;
+
+        if (fname === '' || lname === '' || empNumber === '' || salary === '' || hireDate === '') {
+            alert("Please fill in all fields");
+            return false; // Prevent form submission
+        }
+
+        return true; // Allow form submission
     }
 </script>

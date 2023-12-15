@@ -1,0 +1,118 @@
+﻿@model SchoolProject.Models.Teacher
+@{
+    ViewBag.Title = "Update";
+}
+
+
+<div id="containershow">
+    <nav>
+        <a class="navlink" href="/Teacher/Show/@Model.TeacherId">Back</a>
+    </nav>
+    <h2>Update Teacher</h2>
+    <form method="POST" action="/Teacher/Update/@Model.TeacherId">
+        <div class="inputrow">
+            <label for="TeacherFname">First Name:</label>
+            <input type="text" id="TeacherFname" name="TeacherFname" value="@Model.TeacherFname" />
+
+        </div>
+        <div class="inputrow">
+            <label for="TeacherLname">Last Name:</label>
+            <input type="text" id="TeacherLname" name="TeacherLname" value="@Model.TeacherLname" />
+
+        </div>
+        <div class="inputrow">
+            <label for="TeacherNumber">Employee Number:</label>
+            <input type="text" id="TeacherNumber" name="TeacherNumber" />
+        </div>
+        <div class="inputrow">
+            <label for="TeacherSalary">Salary:</label>
+            <div>
+                <input type="number" id="TeacherSalary" name="TeacherSalary" />
+            </div>
+        </div>
+        <div class="inputrow">
+            <label for="TeacherDate">Hire Date:</label>
+            <div>
+                <input type="date" id="TeacherDate" name="TeacherDate" />
+            </div>
+        </div>
+
+        <div class="inputrow">
+            <input type="submit" value="Update Teahcer" />
+        </div>
+    </form>
+    <button id="updateButton">Update AJAX</button>
+    <div id="updateMessage"></div>
+
+</div>
+
+<script>
+    // Function to validate the form before submission
+    function validateForm() {
+        var salaryInput = document.getElementById("TeacherSalary");
+        var salary = salaryInput.value;
+       
+
+        // Validate required fields
+        if (!document.getElementById('TeacherFname').value ||
+            !document.getElementById('TeacherLname').value ||
+            !document.getElementById('TeacherDate').value ||
+            !document.getElementById('TeacherNumber').value ||
+            !document.getElementById('TeacherSalary').value) {
+            errorLabel.innerHTML = "Please provide all required information.";
+            return false;
+        }
+
+        // Validate salary is a positive number
+        if (isNaN(salary) || salary <= 0) {
+            errorLabel.innerHTML = "Please provide a valid positive number for Salary.";
+            return false;
+        } 
+
+        // Add more custom validation if needed
+        return true; // Return true when the form is valid
+    }
+
+    // Function to update the teacher using plain JavaScript (AJAX)
+    function updateTeacher(id, updatedTeacher) {
+        var xhr = new XMLHttpRequest();
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    // Display success message
+                    document.getElementById('updateMessage').innerText = 'Teacher updated successfully.';
+                } else {
+                    // Display error message
+                    document.getElementById('updateMessage').innerText = 'Error updating teacher.';
+                }
+            }
+        };
+
+        var URL = "http://localhost:62499/api/TeacherData/updateTeacher/" + id;
+        xhr.open('POST', URL, true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.send(JSON.stringify(updatedTeacher));
+    }
+
+    // Click event for the update button
+    document.getElementById('updateButton').addEventListener('click', function () {
+        // Validate the form before making the AJAX request
+        if (validateForm()) {
+            // Get values from the form
+            var teacherId = @Model.TeacherId;
+            var updatedTeacher = {
+                teacherfname: document.getElementById('TeacherFname').value,
+                teacherlname: document.getElementById('TeacherLname').value,
+                employeenumber: document.getElementById('TeacherNumber').value,
+                salary: document.getElementById('TeacherSalary').value,
+                hiredate: document.getElementById('TeacherDate').value,
+            };
+
+            // Call the updateTeacher function
+            updateTeacher(teacherId, updatedTeacher);
+        }
+    });
+</script>
+
+

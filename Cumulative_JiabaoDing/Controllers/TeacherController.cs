@@ -103,6 +103,70 @@ namespace SchoolProject.Controllers
             return View(NewTeacher);
         }
 
+        /// <summary>
+        /// Routes to a dynamically generated "Author Update" Page. Gathers information from the database.
+        /// </summary>
+        /// <param name="id">Id of the Author</param>
+        /// <returns>A dynamic "Update Author" webpage which provides the current information of the author and asks the user for new information as part of a form.</returns>
+        /// <example>GET : /Author/Update/5</example>
+        public ActionResult Update(int id)
+        {
+            TeacherDataController controller = new TeacherDataController();
+            Teacher SelectedTeacher = controller.FindTeacher(id);
+
+            return View(SelectedTeacher);
+        }
+
+
+        /// <summary>
+        /// Handles a POST request containing updated information about an existing teacher in the system. Sends the updated details to the API and redirects to the "Teacher Show" page to display the current information of the updated teacher.
+        /// </summary>
+        /// <param name="id">The identifier of the teacher to update</param>
+        /// <param name="TeacherFname">The updated first name of the teacher</param>
+        /// <param name="TeacherLname">The updated last name of the teacher</param>
+        /// <param name="TeacherNumber">The updated teacher number</param>
+        /// <param name="TeacherSalary">The updated salary of the teacher (defaults to 0.00 if not provided)</param>
+        /// <param name="TeacherDate">The updated date associated with the teacher (defaults to null if not provided)</param>
+        /// <returns>A dynamic webpage displaying the current information of the updated teacher.</returns>
+        /// <example>
+        /// POST: /Teacher/Update/10
+        /// FORM DATA / POST DATA / REQUEST BODY 
+        /// {
+        ///     "TeacherFname": "Christine",
+        ///     "TeacherLname": "Bittle",
+        ///     "TeacherNumber": "12345",
+        ///     "TeacherSalary": 50000.00,
+        ///     "TeacherDate": "2023-12-14"
+        /// }
+        /// </example>
+        [HttpPost]
+        public ActionResult Update(int id, string TeacherFname, string TeacherLname, string TeacherNumber, double TeacherSalary = 0.00, DateTime? TeacherDate = null)
+        {
+            if (string.IsNullOrWhiteSpace(TeacherFname) ||
+                string.IsNullOrWhiteSpace(TeacherLname) ||
+                string.IsNullOrWhiteSpace(TeacherNumber) ||
+                TeacherSalary <= 0 ||
+                TeacherDate == DateTime.MinValue)
+            {
+                // Invalid data, return to the update view with an error message
+                TempData["ErrorMessage"] = "Please fill all";
+                return RedirectToAction("Update");
+            }
+
+            Teacher TeacherInfo = new Teacher();
+            TeacherInfo.TeacherFname = TeacherFname;
+            TeacherInfo.TeacherLname = TeacherLname;
+            TeacherInfo.TeacherNumber = TeacherNumber;
+            TeacherInfo.TeacherSalary = TeacherSalary;
+            TeacherInfo.TeacherDate = (DateTime)TeacherDate;
+
+
+            TeacherDataController controller = new TeacherDataController();
+            controller.UpdateTeacher(id, TeacherInfo);
+
+            return RedirectToAction("Show/" + id);
+        }
+
 
 
 
